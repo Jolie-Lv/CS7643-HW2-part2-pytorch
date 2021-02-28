@@ -212,6 +212,8 @@ def main():
     print(model)
     if torch.cuda.is_available():
         model = model.cuda()
+        gpu_name = torch.cuda.get_device_name(0)
+        print("Using GPU {}".format(gpu_name))
 
     if args.loss_type == "CE":
         criterion = nn.CrossEntropyLoss()
