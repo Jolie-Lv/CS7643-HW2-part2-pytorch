@@ -10,7 +10,7 @@ class MyModel(nn.Module):
         # TODO: Initialize the network weights                                      #
         #############################################################################
         # structure = [64, 'M', 128, 'M', 256, 256, "M", 512, 512, "M", 512, 512, 'M']
-        structure = [64, 'M', 128, "M", 256, "D", 256, 'A', 512, "D", 512, 'A', 512, "D", 512, 'M']
+        structure = [32, 32, 'M', 64, 'M', 128, 128, 'M', 256, "D", 256, 'A', 512, "D", 512, 'M']
         self.structure = self._make_layers(structure)
         self.classifier = nn.Linear(512, 10)
 
@@ -41,7 +41,7 @@ class MyModel(nn.Module):
             elif x == "A":
                 layers += [nn.AvgPool2d(kernel_size=2, stride=2)]
             elif x == "D":
-                layers += [nn.Dropout2d(0.2)]
+                layers += [nn.Dropout2d(0.05)]
             else:
                 layers += [nn.Conv2d(in_channels, x, kernel_size=3, padding=1),
                            nn.BatchNorm2d(x),
