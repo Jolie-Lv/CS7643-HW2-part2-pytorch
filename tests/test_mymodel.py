@@ -43,9 +43,9 @@ class TestMyModel(unittest.TestCase):
         """Define the functions to be tested here."""
         model = model = MyModel()
         if not torch.cuda.is_available():
-            model.load_state_dict(torch.load('./checkpoints/vanillacnn.pth', map_location=torch.device('cpu')))
+            model.load_state_dict(torch.load('./checkpoints/mymodel.pth', map_location=torch.device('cpu')))
         else:
-            model.load_state_dict(torch.load('./checkpoints/vanillacnn.pth'))
+            model.load_state_dict(torch.load('./checkpoints/mymodel.pth'))
 
         transform_test = transforms.Compose([
             transforms.ToTensor(),

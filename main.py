@@ -161,6 +161,7 @@ def main():
     args = parser.parse_args()
     with open(args.config) as f:
         config = yaml.load(f)
+        print("Config File is {}".format(args.config))
 
     for key in config:
         for k, v in config[key].items():
@@ -187,8 +188,10 @@ def main():
                                          transform=transform_train,
                                      )
         cls_num_list = train_dataset.get_cls_num_list()
+        print("cls num list = {}".format(cls_num_list))
         if args.reweight:
             per_cls_weights = reweight(cls_num_list, beta=args.beta)
+            print("beta={}".format(args.beta))
             if torch.cuda.is_available():
                 per_cls_weights = per_cls_weights.cuda()
         else:

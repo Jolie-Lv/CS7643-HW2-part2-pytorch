@@ -19,7 +19,7 @@ def reweight(cls_num_list, beta=0.9999):
     alpha = 1 / E
     C = len(cls_num_list)
     per_cls_weights = alpha / (np.sum(alpha) / C)
-
+    per_cls_weights = torch.tensor(per_cls_weights).float()
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
@@ -48,7 +48,6 @@ class FocalLoss(nn.Module):
         target_one_hot = F.one_hot(target, n_classes).float()
 
         weights = self.weight
-        weights = torch.tensor(weights).float()
         weights = weights.unsqueeze(0)
         weights = weights.repeat(target_one_hot.shape[0], 1) * target_one_hot
         weights = weights.sum(1)
